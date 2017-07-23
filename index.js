@@ -35,7 +35,7 @@ function gsuiteLicenseManager(mainSpecs) {
 
             operation.attempt(function () {
                 service.licenseAssignments.insert(request, function (err, response) {
-                    if (err.code === 412) {
+                    if (err && err.code === 412) {
                         console.log("Warning adding licence, error %s occured: %s, account %s", err.code, err.message, userId);
                         resolve();
                         return;
@@ -80,7 +80,7 @@ function gsuiteLicenseManager(mainSpecs) {
 
             operation.attempt(function () {
                 service.licenseAssignments.delete(request, function (err, response) {
-                    if (err.code === 404) {
+                    if (err && err.code === 404) {
                         console.log("Warning removing licence, error %s occured: %s, account %s", err.code, err.message, userId);
                         resolve();
                         return;
